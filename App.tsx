@@ -1,33 +1,37 @@
-
 import React from 'react';
 import Header from './components/Header';
 import Hero from './components/Hero';
 import About from './components/About';
 import Services from './components/Services';
-import Portfolio from './components/Portfolio';
-import Pricing from './components/Pricing';
 import Testimonials from './components/Testimonials';
-import Blog from './components/Blog';
 import Contact from './components/Contact';
 import Footer from './components/Footer';
+import Stats from './components/Stats';
+import HowItWorks from './components/HowItWorks';
+import UseCases from './components/UseCases';
+import Technology from './components/Technology';
+import { ThemeProvider } from './contexts/ThemeContext';
 
-const App: React.FC = () => {
+function App() {
   return (
-    <div className="bg-primary">
-      <Header />
-      <main>
-        <Hero />
-        <About />
-        <Services />
-        <Portfolio />
-        <Pricing />
-        <Testimonials />
-        <Blog />
-        <Contact />
-      </main>
-      <Footer />
-    </div>
+    <ThemeProvider>
+      <div className="bg-white dark:bg-primary text-gray-800 dark:text-light font-sans">
+        <Header />
+        <main>
+          <Hero />
+          <Stats />
+          <Services />
+          <HowItWorks />
+          <UseCases />
+          <Technology />
+          <Testimonials />
+          <About />
+          <Contact />
+        </main>
+        <Footer />
+      </div>
+    </ThemeProvider>
   );
-};
+}
 
 export default App;

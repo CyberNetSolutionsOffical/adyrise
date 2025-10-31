@@ -1,43 +1,145 @@
-
 <!DOCTYPE html>
-<html lang="en" class="scroll-smooth">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>AI Automation Agency Nepal</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-      tailwind.config = {
-        theme: {
-          extend: {
-            colors: {
-              'primary': '#0D1B2A',
-              'secondary': '#1B263B',
-              'accent': '#415A77',
-              'light': '#E0E1DD',
-              'highlight': '#00A8E8',
-            },
-            fontFamily: {
-              sans: ['Inter', 'sans-serif'],
-            },
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <!-- SEO Meta Tags -->
+  <title>Adyrise | AI Automation Agency</title>
+  <meta name="description" content="Adyrise is a premier AI Automation Agency in Nepal, specializing in custom AI solutions like chatbots, workflow automation, and data analysis to boost efficiency and drive business growth." />
+  <meta name="keywords" content="AI Automation Nepal, AI Agency, Business Automation, AI Chatbots, Workflow Automation, Custom AI Solutions, Adyrise, Artificial Intelligence Nepal" />
+  <link rel="canonical" href="https://www.adyrise.com/" />
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://www.adyrise.com/" />
+  <meta property="og:title" content="Adyrise | AI Automation Agency in Nepal" />
+  <meta property="og:description" content="We build custom AI-powered automations to streamline operations, boost efficiency, and drive growth for your business in Nepal." />
+  <meta property="og:image" content="https://picsum.photos/seed/social/1200/630" />
+  <meta property="og:site_name" content="Adyrise" />
+
+  <!-- Twitter -->
+  <meta property="twitter:card" content="summary_large_image" />
+  <meta property="twitter:url" content="https://www.adyrise.com/" />
+  <meta property="twitter:title" content="Adyrise | AI Automation Agency in Nepal" />
+  <meta property="twitter:description" content="We build custom AI-powered automations to streamline operations, boost efficiency, and drive growth for your business in Nepal." />
+  <meta property="twitter:image" content="https://picsum.photos/seed/social/1200/630" />
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            primary: '#0D1117',
+            secondary: '#161B22',
+            light: '#E0E1DD',
+            highlight: '#58A6FF',
+            accent: '#7D8590',
+          },
+          fontFamily: {
+            sans: ['"Inter"', 'sans-serif'],
           },
         },
+      },
+    }
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Inter', sans-serif;
+      transition: background-color 0.3s ease, color 0.3s ease;
+      background: #ffffff radial-gradient(circle at top left, hsla(212, 100%, 68%, 0.08), transparent 40%), radial-gradient(circle at bottom right, hsla(263, 100%, 71%, 0.08), transparent 40%);
+      background-size: 300% 300%;
+      animation: gradient-animation 20s ease infinite;
+    }
+    html.dark body {
+      background: #0D1117 radial-gradient(circle at top left, hsla(212, 100%, 68%, 0.15), transparent 40%), radial-gradient(circle at bottom right, hsla(263, 100%, 71%, 0.15), transparent 40%);
+      background-size: 300% 300%;
+      animation: gradient-animation 20s ease infinite;
+    }
+
+    @keyframes gradient-animation {
+      0% {
+        background-position: 0% 50%;
       }
-    </script>
-    <link rel="stylesheet" href="https://rsms.me/inter/inter.css">
-    <script type="module" src="/index.tsx"></script>
-  <script type="importmap">
-{
-  "imports": {
-    "react": "https://aistudiocdn.com/react@^19.2.0",
-    "react/": "https://aistudiocdn.com/react@^19.2.0/",
-    "react-dom/": "https://aistudiocdn.com/react-dom@^19.2.0/"
-  }
-}
-</script>
+      50% {
+        background-position: 100% 50%;
+      }
+      100% {
+        background-position: 0% 50%;
+      }
+    }
+
+    .header-background {
+      background-image: linear-gradient(rgba(13, 17, 23, 0.6), rgba(13, 17, 23, 0.6)), url('data:image/jpeg;base64,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');
+      background-size: cover;
+      background-position: center;
+    }
+
+    .delay-100 { transition-delay: 100ms; }
+    .delay-200 { transition-delay: 200ms; }
+    .delay-300 { transition-delay: 300ms; }
+    .delay-400 { transition-delay: 400ms; }
+    .delay-500 { transition-delay: 500ms; }
+    
+    .fade-in-up {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+    }
+
+    .fade-in-up.is-visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+    .spinner {
+      display: inline-block;
+      width: 1rem;
+      height: 1rem;
+      border: 2px solid rgba(255, 255, 255, 0.3);
+      border-radius: 50%;
+      border-top-color: #fff;
+      animation: spin 1s ease-in-out infinite;
+    }
+
+    @keyframes reveal-letter {
+      0% {
+        opacity: 0;
+        transform: translateY(10px);
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .animate-letter-reveal {
+      display: inline-block;
+      opacity: 0;
+      animation: reveal-letter 0.5s forwards;
+    }
+  </style>
 </head>
-  <body class="bg-primary text-light">
-    <div id="root"></div>
-  </body>
+<body>
+  <noscript>You need to enable JavaScript to run this app.</noscript>
+  <div id="root"></div>
+  <script type="importmap">
+  {
+    "imports": {
+      "react": "https://aistudiocdn.com/react@^19.2.0",
+      "react-dom/": "https://aistudiocdn.com/react-dom@^19.2.0/",
+      "react/": "https://aistudiocdn.com/react@^19.2.0/"
+    }
+  }
+  </script>
+  <script type="module" src="/index.tsx"></script>
+</body>
 </html>

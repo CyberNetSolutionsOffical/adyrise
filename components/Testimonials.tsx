@@ -1,66 +1,59 @@
-
 import React from 'react';
 import type { Testimonial } from '../types';
+import useIntersectionObserver from './useIntersectionObserver';
 
-const testimonialsData: Testimonial[] = [
+const testimonialData: Testimonial[] = [
   {
-    quote: "Their AI chatbot transformed our customer service overnight. Our team can now focus on complex issues while the bot handles 80% of queries. Highly recommended!",
-    name: 'Ramesh Adhikari',
-    title: 'CEO, Nepal Trekking Co.',
-    image: 'https://picsum.photos/seed/client1/100',
-    rating: 5,
+    quote: "Adyrise's chatbot solution transformed our customer service. We're now handling 3x more queries with the same team size. Incredible ROI!",
+    author: 'Sunil Shrestha',
+    company: 'CEO, Nepal E-commerce Hub',
+    image: 'https://i.pravatar.cc/150?u=sunil'
   },
   {
-    quote: "The marketing automation system they built for us is a game-changer. We've seen a 200% increase in qualified leads in just three months. Incredible results!",
-    name: 'Priya Karki',
-    title: 'Marketing Director, Himalayan Java',
-    image: 'https://picsum.photos/seed/client2/100',
-    rating: 5,
+    quote: "The automation for our social media was a game-changer. What used to take us 10 hours a week now runs on its own, and our engagement is up 50%.",
+    author: 'Anjali Lama',
+    company: 'Marketing Manager, Himalayan Travels',
+    image: 'https://i.pravatar.cc/150?u=anjali'
   },
   {
-    quote: "As a manufacturing company, efficiency is key. Their business process automation saved us countless hours and reduced human error significantly. A truly valuable partner.",
-    name: 'Sandeep Shrestha',
-    title: 'Operations Manager, Everest Steel',
-    image: 'https://picsum.photos/seed/client3/100',
-    rating: 5,
+    quote: "We were skeptical about AI, but the team at Adyrise made it so simple. The invoice processing system they built is flawless and has saved us thousands.",
+    author: 'Rajesh Thapa',
+    company: 'Founder, Kathmandu Crafts',
+    image: 'https://i.pravatar.cc/150?u=rajesh'
   },
 ];
 
-const StarRating = ({ rating }: { rating: number }) => (
-    <div className="flex text-yellow-400">
-        {[...Array(5)].map((_, i) => (
-            <svg key={i} className={`w-5 h-5 ${i < rating ? 'text-yellow-400' : 'text-gray-500'}`} fill="currentColor" viewBox="0 0 20 20">
-                <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-            </svg>
-        ))}
-    </div>
-);
+const TestimonialCard = ({ testimonial, index }: { testimonial: Testimonial, index: number }) => {
+    const [ref, isVisible] = useIntersectionObserver<HTMLDivElement>({ threshold: 0.1 });
+    const delay = `delay-${index * 100}`;
 
-const TestimonialCard = ({ testimonial }: { testimonial: Testimonial }) => (
-    <div className="bg-secondary p-8 rounded-lg shadow-lg flex flex-col h-full">
-        <StarRating rating={testimonial.rating} />
-        <p className="text-light my-4 flex-grow">"{testimonial.quote}"</p>
-        <div className="flex items-center mt-4">
-            <img src={testimonial.image} alt={testimonial.name} className="w-14 h-14 rounded-full object-cover mr-4"/>
-            <div>
-                <p className="font-bold text-white">{testimonial.name}</p>
-                <p className="text-accent text-sm">{testimonial.title}</p>
+    return (
+        <div ref={ref} className={`bg-white dark:bg-secondary p-8 rounded-lg shadow-lg h-full flex flex-col fade-in-up ${delay} ${isVisible ? 'is-visible' : ''}`}>
+            <p className="text-gray-700 dark:text-light italic mb-6 flex-grow">"{testimonial.quote}"</p>
+            <div className="flex items-center">
+                <img src={testimonial.image} alt={testimonial.author} className="w-14 h-14 rounded-full mr-4" />
+                <div>
+                    <p className="font-bold text-gray-900 dark:text-white">{testimonial.author}</p>
+                    <p className="text-sm text-gray-500 dark:text-accent">{testimonial.company}</p>
+                </div>
             </div>
         </div>
-    </div>
-);
+    );
+};
 
 const Testimonials: React.FC = () => {
+  const [sectionRef, isSectionVisible] = useIntersectionObserver<HTMLElement>({ threshold: 0.1 });
+
   return (
-    <section id="testimonials" className="py-20 bg-secondary">
+    <section id="testimonials" className="py-20 bg-white dark:bg-primary" ref={sectionRef}>
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-16">
-          <h2 className="text-3xl md:text-4xl font-bold text-white">What Our Clients Say</h2>
-          <p className="text-accent mt-4 text-lg">Real stories from businesses we've empowered.</p>
+        <div className={`text-center mb-16 fade-in-up ${isSectionVisible ? 'is-visible' : ''}`}>
+          <h2 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white">What Our Clients Say</h2>
+          <p className="text-gray-500 dark:text-accent mt-4 text-lg">Real stories from businesses we've empowered.</p>
         </div>
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-          {testimonialsData.map((testimonial, index) => (
-            <TestimonialCard key={index} testimonial={testimonial} />
+          {testimonialData.map((testimonial, index) => (
+            <TestimonialCard key={index} testimonial={testimonial} index={index} />
           ))}
         </div>
       </div>

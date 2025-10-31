@@ -1,45 +1,51 @@
-
 import React from 'react';
+import useIntersectionObserver from './useIntersectionObserver';
 
 const Hero: React.FC = () => {
+  const [ref, isVisible] = useIntersectionObserver<HTMLElement>({ threshold: 0.1 });
+
+  const headingText = "Automate Your Business with Intelligent ";
+{                                                                     }
+
+  const highlightedText = "AI Solutions";
+
   return (
-    <section id="home" className="relative pt-24 pb-12 lg:pt-32 lg:pb-20">
-      <div className="absolute inset-0 bg-primary opacity-50"></div>
-       <div className="absolute inset-0 bg-cover bg-center" style={{ backgroundImage: "url('https://picsum.photos/1920/1080?random=1&grayscale&blur=2')" }}></div>
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative">
-        <div className="grid lg:grid-cols-2 gap-12 items-center">
-          <div className="text-center lg:text-left">
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-white leading-tight mb-6">
-              Transform Your Business with <span className="text-highlight">AI Automation</span>
-            </h1>
-            <p className="text-lg md:text-xl text-light mb-8 max-w-xl mx-auto lg:mx-0">
-              We help businesses in Nepal save time, increase efficiency, and grow revenue through AI-powered automation.
-            </p>
-            <div className="flex flex-col sm:flex-row justify-center lg:justify-start gap-4">
-              <a
-                href="#contact"
-                className="bg-highlight text-white font-bold py-3 px-8 rounded-lg text-lg hover:bg-opacity-80 transition-all duration-300 transform hover:scale-105"
+    <section id="home" className="py-24 md:py-32 bg-white dark:bg-primary" ref={ref}>
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 text-center">
+        <div className={`max-w-3xl mx-auto fade-in-up ${isVisible ? 'is-visible' : ''}`}>
+          <h1 className="text-4xl md:text-6xl font-extrabold text-gray-900 dark:text-white leading-relaxed">
+            {isVisible && headingText.split('').map((char, index) => (
+              <span 
+                key={index}
+                className="animate-letter-reveal"
+                style={{ animationDelay: `${index * 50}ms` }}
               >
-                Book a Free Demo
-              </a>
-              <a
-                href="#services"
-                className="bg-transparent border-2 border-highlight text-highlight font-bold py-3 px-8 rounded-lg text-lg hover:bg-highlight hover:text-white transition-all duration-300 transform hover:scale-105"
-              >
-                See Our Services
-              </a>
-            </div>
+                {char}
+              </span>
+            ))}
+            <span className="text-highlight">
+              {isVisible && highlightedText.split('').map((char, index) => (
+                <span 
+                  key={index}
+                  className="animate-letter-reveal"
+                  style={{ animationDelay: `${(headingText.length + index) * 50}ms` }}
+                >
+                  {char}
+                </span>
+              ))}
+            </span>
+          </h1>
+          <p className="mt-8 text-lg md:text-xl text-gray-600 dark:text-light max-w-2xl mx-auto">
+            We build custom AI-powered automations to streamline your operations, boost efficiency, and drive growth for your business in Nepal.
+          </p>
+          <div className="mt-10 flex flex-col sm:flex-row justify-center gap-4">
+            <a href="#services" className="bg-highlight text-white font-bold py-3 px-8 rounded-lg text-lg hover:bg-opacity-80 transition-colors duration-300">
+              Explore Our Services
+            </a>
+            <a href="#contact" className="bg-gray-100 dark:bg-secondary text-gray-800 dark:text-light font-bold py-3 px-8 rounded-lg text-lg hover:bg-gray-200 dark:hover:bg-accent dark:hover:text-white transition-colors duration-300">
+              Get a Free Consultation
+            </a>
           </div>
-          <div className="hidden lg:block">
-            <img 
-              src="https://picsum.photos/seed/ai-hero/600/500" 
-              alt="AI Automation" 
-              className="rounded-xl shadow-2xl"
-            />
-          </div>
-        </div>
-        <div className="mt-20 text-center">
-            <p className="text-accent font-semibold">Trusted by 100+ Businesses in Nepal</p>
         </div>
       </div>
     </section>

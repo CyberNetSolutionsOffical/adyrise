@@ -1,10 +1,17 @@
+import type { ReactNode } from 'react';
 
-import React from 'react';
+export interface Testimonial {
+  quote: string;
+  author: string;
+  company: string;
+  image: string;
+}
 
-export interface Service {
-  icon: React.ElementType;
+export interface UseCase {
   title: string;
   description: string;
+  youtubeUrl: string;
+  icon: ReactNode;
 }
 
 export interface PortfolioItem {
@@ -22,17 +29,9 @@ export interface PricingPlan {
   isPopular: boolean;
 }
 
-export interface Testimonial {
-  quote: string;
-  name: string;
-  title: string;
-  image: string;
-  rating: number;
-}
-
 export interface BlogPost {
-    image: string;
-    category: string;
-    title: string;
-    excerpt: string;
+  image: string;
+  category: string;
+  title: string;
+  excerpt: string;
 }
